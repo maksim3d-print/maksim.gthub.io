@@ -3,67 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>HotPrint 3D | Кликер с 50+ скинами</title>
+    <title>HotPrint 3D | Кликер</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
         body { background: #0a0a0a; font-family: 'Segoe UI', system-ui, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
         .game { max-width: 750px; width: 100%; background: #1a1a1a; border-radius: 32px; padding: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); border: 1px solid #333; }
         .stats { background: #252525; border-radius: 20px; padding: 18px; margin-bottom: 20px; text-align: center; border: 1px solid #3a3a3a; }
         .hotprint-logo { font-size: 1.6rem; font-weight: 800; letter-spacing: 2px; background: linear-gradient(135deg, #ccc, #fff); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 8px; }
-        .world-badge { background: #333; display: inline-block; padding: 5px 14px; border-radius: 30px; font-size: 13px; font-weight: bold; margin-bottom: 8px; color: #ddd; }
         .score { font-size: 46px; font-weight: 800; color: #f5f5f5; letter-spacing: 1px; }
         .perclick, .passive { font-size: 14px; color: #aaa; margin-top: 6px; }
-        .click-btn { width: 100%; padding: 28px; background: linear-gradient(145deg, #2c2c2c, #1e1e1e); border: none; border-radius: 80px; font-size: 28px; font-weight: bold; color: white; cursor: pointer; margin-bottom: 22px; transition: 0.07s linear; box-shadow: 0 8px 0 #0a0a0a; font-family: inherit; position: relative; overflow: hidden; }
+        .click-btn { width: 100%; padding: 28px; background: linear-gradient(145deg, #2c2c2c, #1e1e1e); border: none; border-radius: 80px; font-size: 28px; font-weight: bold; color: white; cursor: pointer; margin-bottom: 22px; transition: 0.07s linear; box-shadow: 0 8px 0 #0a0a0a; font-family: inherit; }
         .click-btn:active { transform: translateY(4px); box-shadow: 0 4px 0 #0a0a0a; }
-        .click-btn.disabled { opacity: 0.6; cursor: not-allowed; transform: none; pointer-events: none; }
         
-        /* 50+ анимированных скинов */
-        .click-btn.skin-rainbow { background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet); animation: hueRotate 1s infinite; background-size: 200% 200%; }
+        /* Анимации скинов */
+        .click-btn.skin-rainbow { background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet); animation: hueRotate 1s infinite; }
         .click-btn.skin-neon { background: #0ff; box-shadow: 0 0 20px #0ff; animation: pulse 0.8s infinite alternate; }
         .click-btn.skin-fire { background: linear-gradient(135deg, #ff3300, #ff6600); animation: firePulse 0.5s infinite alternate; }
         .click-btn.skin-ice { background: linear-gradient(135deg, #00ccff, #0066ff); animation: icePulse 1s infinite alternate; }
         .click-btn.skin-gold { background: linear-gradient(135deg, #ffd700, #b8860b); animation: goldShine 1s infinite; }
-        .click-btn.skin-matrix { background: #0a0a0a; color: #0f0; text-shadow: 0 0 5px #0f0; animation: matrixRain 0.5s infinite; }
+        .click-btn.skin-matrix { background: #0a0a0a; color: #0f0; text-shadow: 0 0 5px #0f0; }
         .click-btn.skin-hologram { background: linear-gradient(135deg, #ff00ff, #00ffff); animation: hologram 1.5s infinite; }
         .click-btn.skin-crystal { background: linear-gradient(135deg, #e0e0e0, #a0a0ff); animation: crystal 0.8s infinite alternate; }
         .click-btn.skin-lava { background: radial-gradient(circle, #ff4500, #8b0000); animation: lava 0.6s infinite alternate; }
         .click-btn.skin-galaxy { background: radial-gradient(ellipse at center, #2b005e, #000000); animation: galaxy 3s infinite; }
-        .click-btn.skin-steampunk { background: linear-gradient(135deg, #8b5a2b, #cd7f32); border: 2px solid #ffd700; animation: gearRotate 2s linear infinite; }
-        .click-btn.skin-cyber { background: #000; border: 2px solid #0ff; box-shadow: 0 0 15px #0ff; animation: cyberGlitch 0.3s infinite; }
-        .click-btn.skin-christmas { background: linear-gradient(135deg, #ff0000, #008000); animation: christmas 0.5s infinite alternate; }
-        .click-btn.skin-ocean { background: linear-gradient(135deg, #0066cc, #00ccff); animation: ocean 2s infinite; }
-        .click-btn.skin-sunset { background: linear-gradient(135deg, #ff7e5e, #feb47b); animation: sunset 1s infinite alternate; }
-        .click-btn.skin-aurora { background: linear-gradient(135deg, #00ff88, #0088ff, #8800ff); animation: aurora 2s infinite; background-size: 200% 200%; }
+        .click-btn.skin-steampunk { background: linear-gradient(135deg, #8b5a2b, #cd7f32); border: 2px solid #ffd700; }
+        .click-btn.skin-cyber { background: #000; border: 2px solid #0ff; box-shadow: 0 0 15px #0ff; }
+        .click-btn.skin-christmas { background: linear-gradient(135deg, #ff0000, #008000); }
+        .click-btn.skin-ocean { background: linear-gradient(135deg, #0066cc, #00ccff); }
+        .click-btn.skin-sunset { background: linear-gradient(135deg, #ff7e5e, #feb47b); }
+        .click-btn.skin-aurora { background: linear-gradient(135deg, #00ff88, #0088ff, #8800ff); background-size: 200% 200%; animation: aurora 2s infinite; }
         .click-btn.skin-plasma { background: radial-gradient(circle, #ff0080, #8000ff); animation: plasma 0.5s infinite alternate; }
         .click-btn.skin-void { background: #000; border: 2px solid #fff; animation: voidPulse 1s infinite alternate; }
+        .click-btn.skin-candy { background: linear-gradient(135deg, #ff69b4, #ff1493); animation: candy 0.5s infinite alternate; }
+        .click-btn.skin-forest { background: linear-gradient(135deg, #228b22, #006400); }
+        .click-btn.skin-storm { background: linear-gradient(135deg, #4a4a4a, #2c2c2c); animation: storm 0.3s infinite; }
         
         @keyframes hueRotate { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
         @keyframes pulse { 0% { box-shadow: 0 0 10px #0ff; } 100% { box-shadow: 0 0 30px #0ff; } }
         @keyframes firePulse { 0% { filter: brightness(1); } 100% { filter: brightness(1.3); } }
-        @keyframes icePulse { 0% { filter: brightness(1); background-position: 0% 50%; } 100% { filter: brightness(1.2); background-position: 100% 50%; } }
+        @keyframes icePulse { 0% { filter: brightness(1); background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         @keyframes goldShine { 0% { filter: brightness(1); } 50% { filter: brightness(1.2); } 100% { filter: brightness(1); } }
-        @keyframes matrixRain { 0% { background-position: 0% 0%; } 100% { background-position: 0% 100%; } }
         @keyframes hologram { 0% { opacity: 0.8; } 50% { opacity: 1; } 100% { opacity: 0.8; } }
         @keyframes crystal { 0% { filter: brightness(1); } 100% { filter: brightness(1.1) saturate(1.2); } }
         @keyframes lava { 0% { filter: brightness(1); } 100% { filter: brightness(1.15); } }
         @keyframes galaxy { 0% { background-position: 0% 0%; } 100% { background-position: 100% 100%; } }
-        @keyframes gearRotate { 0% { background-position: 0% 0%; } 100% { background-position: 100% 0%; } }
-        @keyframes cyberGlitch { 0% { opacity: 1; } 50% { opacity: 0.9; } 100% { opacity: 1; } }
-        @keyframes christmas { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(10deg); } }
-        @keyframes ocean { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
-        @keyframes sunset { 0% { filter: brightness(1); } 100% { filter: brightness(1.1); } }
         @keyframes aurora { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         @keyframes plasma { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
         @keyframes voidPulse { 0% { box-shadow: 0 0 5px #fff; } 100% { box-shadow: 0 0 20px #fff; } }
+        @keyframes candy { 0% { filter: brightness(1); } 100% { filter: brightness(1.2); } }
+        @keyframes storm { 0% { filter: brightness(1); } 100% { filter: brightness(0.8); } }
         
         .tabs { display: flex; gap: 4px; margin-bottom: 18px; flex-wrap: wrap; }
         .tab { flex: 1; padding: 8px 2px; background: #2a2a2a; border: none; border-radius: 40px; color: #ccc; cursor: pointer; font-weight: bold; font-size: 11px; }
         .tab.active { background: #555; color: white; }
         .tab-content { display: none; max-height: 450px; overflow-y: auto; }
         .tab-content.active { display: block; }
-        .upgrade-item, .skin-item, .achievement-item, .casino-item, .printer-item, .daily-item, .event-item {
-            background: #252525; border-radius: 18px; padding: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; border: 1px solid #3f3f3f;
+        .upgrade-item, .skin-item, .achievement-item, .casino-item, .printer-item {
+            background: #252525; border-radius: 18px; padding: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; border: 1px solid #3f3f3f; cursor: pointer;
         }
+        .skin-item:hover { background: #3a3a3a; }
         .upgrade-info, .skin-info { flex: 2; min-width: 120px; }
         .upgrade-name, .skin-name { font-weight: bold; color: #ddd; font-size: 13px; }
         .upgrade-desc, .skin-desc { font-size: 10px; color: #888; }
@@ -75,24 +73,20 @@
         .error-msg { color: #ff8866; font-size: 11px; text-align: center; margin-top: 8px; animation: fadeOut 2s forwards; }
         @keyframes fadeOut { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; display: none; } }
         .name-input { width: 100%; padding: 8px; margin: 8px 0; background: #2a2a2a; border: 1px solid #555; border-radius: 30px; color: white; text-align: center; }
-        .achievement-popup { position: fixed; top: 20%; left: 50%; transform: translate(-50%, -50%); background: #ffaa33; color: #1a1a1a; padding: 10px 20px; border-radius: 40px; font-weight: bold; z-index: 1000; animation: fadeOut 2s forwards; }
+        .achievement-popup { position: fixed; top: 20%; left: 50%; transform: translate(-50%, -50%); background: #ffaa33; color: #1a1a1a; padding: 10px 20px; border-radius: 40px; font-weight: bold; z-index: 1000; animation: fadeOutPopup 2s forwards; }
+        @keyframes fadeOutPopup { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; display: none; } }
         footer { font-size: 9px; text-align: center; color: #555; margin-top: 12px; }
-        .bonus-badge { background: #ffaa33; color: #1a1a1a; border-radius: 20px; padding: 2px 8px; font-size: 10px; margin-left: 5px; }
-        .ban-timer { background: #ff3333; color: white; padding: 4px 12px; border-radius: 30px; font-size: 11px; margin-top: 8px; display: inline-block; }
-        .daily-reward { background: #2a2a2a; border-radius: 16px; padding: 12px; margin-bottom: 15px; text-align: center; }
-        .prestige-badge { background: #aa33ff; color: white; border-radius: 20px; padding: 2px 8px; font-size: 10px; margin-left: 5px; }
+        .active-skin { border: 2px solid #ffaa66; background: #3a3a3a; }
     </style>
 </head>
 <body>
 <div class="game">
     <div class="stats">
         <div class="hotprint-logo">🔧 HOTPRINT · 3D ПЕЧАТЬ</div>
-        <div class="world-badge" id="worldBadge">🌍 Мир 1</div>
         <div class="score" id="scoreDisplay">0</div>
-        <div class="perclick">⚡ за клик: <span id="perClickValue">1</span> <span id="bonusIndicator" class="bonus-badge"></span> <span id="prestigeIndicator" class="prestige-badge"></span></div>
+        <div class="perclick">⚡ за клик: <span id="perClickValue">1</span></div>
         <div class="passive">🏭 деталей/сек: <span id="passiveValue">0</span></div>
         <div class="star-info">⭐ Звёзд: <span id="starPoints">0</span></div>
-        <div id="banStatus" style="min-height: 28px;"></div>
     </div>
 
     <button class="click-btn" id="clickBtn">🖨️ ПЕЧАТАТЬ</button>
@@ -104,51 +98,35 @@
         <button class="tab" data-tab="skins">🎨 Скины (54)</button>
         <button class="tab" data-tab="printers">🖨️ Принтеры</button>
         <button class="tab" data-tab="casino">🎰 Казино</button>
-        <button class="tab" data-tab="daily">🎁 Ежедневно</button>
-        <button class="tab" data-tab="events">⚡ События</button>
-        <button class="tab" data-tab="achievements">🏆 Ачивки (100+)</button>
+        <button class="tab" data-tab="achievements">🏆 Ачивки (100)</button>
     </div>
 
     <div id="upgradesTab" class="tab-content active"><div id="upgradesList"></div>
         <button id="resetProgressBtn" class="buy-btn reset-btn">♻️ СБРОСИТЬ ВСЁ</button>
         <button id="rebirthBtn" class="buy-btn reset-btn" style="margin-top:10px;">🌟 ПЕРЕРОДИТЬСЯ (10 млн | +5⭐)</button>
-        <button id="prestigeBtn" class="buy-btn reset-btn" style="margin-top:10px; background:#6a1b9a;">👑 ПРЕСТИЖ (100 млн | +0.2 множитель)</button>
     </div>
 
     <div id="skinsTab" class="tab-content"><div id="skinsList"></div></div>
 
     <div id="printersTab" class="tab-content"><div id="printersList"></div>
-        <div style="font-size:11px; color:#888; text-align:center; margin-top:10px;">✨ Декоративные принтеры — не приносят дохода</div>
+        <div style="font-size:11px; color:#888; text-align:center; margin-top:10px;">✨ Декоративные принтеры</div>
     </div>
 
     <div id="casinoTab" class="tab-content">
-        <div class="casino-item"><div class="upgrade-info"><div class="upgrade-name">🎲 Кость</div><div class="upgrade-desc">x2 | шанс 40%</div></div><input type="number" id="diceBet" class="casino-stake" style="background:#333; border:none; color:white; padding:4px 8px; border-radius:20px; width:100px;" value="10000"><button class="buy-btn" id="casinoDiceBtn">Играть</button></div>
+        <div class="casino-item"><div class="upgrade-info"><div class="upgrade-name">🎲 Кость</div><div class="upgrade-desc">x2 | шанс 40%</div></div><input type="number" id="diceBet" style="background:#333; border:none; color:white; padding:4px 8px; border-radius:20px; width:100px;" value="10000"><button class="buy-btn" id="casinoDiceBtn">Играть</button></div>
         <div class="casino-item"><div class="upgrade-info"><div class="upgrade-name">🔥 Рулетка</div><div class="upgrade-desc">x3 | шанс 25%</div></div><input type="number" id="rouletteBet" style="background:#333; border:none; color:white; padding:4px 8px; border-radius:20px; width:100px;" value="50000"><button class="buy-btn" id="casinoRouletteBtn">Крутить</button></div>
         <div class="casino-item"><div class="upgrade-info"><div class="upgrade-name">💎 Слоты</div><div class="upgrade-desc">x5 | шанс 15%</div></div><input type="number" id="slotsBet" style="background:#333; border:none; color:white; padding:4px 8px; border-radius:20px; width:100px;" value="200000"><button class="buy-btn" id="casinoSlotsBtn">Запустить</button></div>
         <div class="casino-item"><div class="upgrade-info"><div class="upgrade-name">⚡ КРАШ</div><div class="upgrade-desc">x10 | шанс 8%</div></div><input type="number" id="crashBet" style="background:#333; border:none; color:white; padding:4px 8px; border-radius:20px; width:100px;" value="500000"><button class="buy-btn" id="casinoCrashBtn">КРАШНУТЬ</button></div>
         <div id="casinoMessage" style="background:#2a2a2a; padding:8px; border-radius:16px; text-align:center; margin-top:10px; color:#ffaa66;"></div>
     </div>
 
-    <div id="dailyTab" class="tab-content">
-        <div class="daily-reward"><h3>🎁 Ежедневный бонус</h3><div id="dailyStatus">Загрузка...</div><button id="dailyClaimBtn" class="buy-btn" style="margin-top:8px;">Забрать</button></div>
-        <div class="daily-reward"><h3>🎰 Лотерея</h3><div>Билет 1000 деталей, шанс выиграть 10000</div><button id="lotteryBtn" class="buy-btn" style="margin-top:8px;">Купить билет</button></div>
-    </div>
-
-    <div id="eventsTab" class="tab-content">
-        <div class="event-item"><div class="upgrade-info"><div class="upgrade-name">💰 Счастливый час</div><div class="upgrade-desc">x2 деталей на 30 сек</div></div><button class="buy-btn" id="eventHappyHour">Активировать (50⭐)</button></div>
-        <div class="event-item"><div class="upgrade-info"><div class="upgrade-name">🚀 Ускорение</div><div class="upgrade-desc">+100% к пассивке на 1 мин</div></div><button class="buy-btn" id="eventBoost">Активировать (30⭐)</button></div>
-        <div class="event-item"><div class="upgrade-info"><div class="upgrade-name">⭐ Звёздный дождь</div><div class="upgrade-desc">+10⭐ разово</div></div><button class="buy-btn" id="eventStarRain">Активировать (100⭐)</button></div>
-        <div id="eventMessage" style="background:#2a2a2a; padding:8px; border-radius:16px; text-align:center; margin-top:10px;"></div>
-    </div>
-
     <div id="achievementsTab" class="tab-content"><div id="achievementsList"></div></div>
 
-    <footer>⭐ Звёзды даются сложно: только за перерождение (5⭐) и редкие события</footer>
+    <footer>⭐ Звёзды за перерождение (5⭐) | Нажми на скин, чтобы применить</footer>
     <div id="errorMsg" style="height:24px;"></div>
 </div>
 
 <script>
-    // ========== ФОРМАТ ЧИСЕЛ ==========
     function formatNumber(num) {
         if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
         if (num >= 1000) return (num / 1000).toFixed(1) + "K";
@@ -156,14 +134,15 @@
     }
     
     // ========== ИГРОВЫЕ ДАННЫЕ ==========
-    let score = 0, totalEarned = 0, clickPower = 1, currentWorld = 1, rebirthBonus = 0, starPoints = 0, prestigeMultiplier = 1;
+    let score = 0, totalEarned = 0, clickPower = 1, rebirthBonus = 0, starPoints = 0;
+    let currentSkin = 0;
     let playerName = localStorage.getItem('playerName') || "Гость";
     document.getElementById('playerName').value = playerName;
     document.getElementById('playerName').onchange = () => { playerName = document.getElementById('playerName').value.slice(0,20); localStorage.setItem('playerName', playerName); updateUI(); };
     
-    // 54 скина с анимациями
+    // ========== 54 СКИНА С НАЗВАНИЯМИ ==========
     const skins = [
-        { id:0, name:"🌑 Классика", class:"", price:0, bought:true },
+        { id:0, name:"⚫ Классика", class:"", price:0, bought:true },
         { id:1, name:"🌈 Радуга", class:"skin-rainbow", price:5, bought:false },
         { id:2, name:"💚 Неон", class:"skin-neon", price:8, bought:false },
         { id:3, name:"🔥 Огонь", class:"skin-fire", price:10, bought:false },
@@ -182,11 +161,51 @@
         { id:16, name:"✨ Аврора", class:"skin-aurora", price:25, bought:false },
         { id:17, name:"⚡ Плазма", class:"skin-plasma", price:30, bought:false },
         { id:18, name:"🕳️ Бездна", class:"skin-void", price:35, bought:false },
+        { id:19, name:"🍭 Конфетный взрыв", class:"skin-candy", price:28, bought:false },
+        { id:20, name:"🌲 Тёмный лес", class:"skin-forest", price:20, bought:false },
+        { id:21, name:"⛈️ Грозовой", class:"skin-storm", price:22, bought:false },
+        { id:22, name:"🎃 Хэллоуин", class:"skin-fire", price:25, bought:false },
+        { id:23, name:"💀 Некромант", class:"skin-void", price:40, bought:false },
+        { id:24, name:"🐉 Драконий", class:"skin-fire", price:45, bought:false },
+        { id:25, name:"🌸 Сакура", class:"skin-candy", price:20, bought:false },
+        { id:26, name:"🎆 Фейерверк", class:"skin-rainbow", price:30, bought:false },
+        { id:27, name:"🕯️ Свечной", class:"skin-gold", price:18, bought:false },
+        { id:28, name:"🧪 Лаборатория", class:"skin-neon", price:25, bought:false },
+        { id:29, name:"⚜️ Византийский", class:"skin-gold", price:35, bought:false },
+        { id:30, name:"🌙 Лунный", class:"skin-ice", price:28, bought:false },
+        { id:31, name:"☀️ Солнечный", class:"skin-fire", price:28, bought:false },
+        { id:32, name:"🕷️ Паутина", class:"skin-void", price:32, bought:false },
+        { id:33, name:"🧊 Арктика", class:"skin-ice", price:25, bought:false },
+        { id:34, name:"🏜️ Пустыня", class:"skin-sunset", price:22, bought:false },
+        { id:35, name:"🌋 Вулкан", class:"skin-lava", price:30, bought:false },
+        { id:36, name:"🧠 ИИ", class:"skin-cyber", price:35, bought:false },
+        { id:37, name:"💀 Смерть", class:"skin-void", price:50, bought:false },
+        { id:38, name:"👻 Призрак", class:"skin-hologram", price:28, bought:false },
+        { id:39, name:"🐺 Оборотень", class:"skin-forest", price:30, bought:false },
+        { id:40, name:"🧛 Вампир", class:"skin-plasma", price:35, bought:false },
+        { id:41, name:"🧙 Маг", class:"skin-galaxy", price:40, bought:false },
+        { id:42, name:"🏴‍☠️ Пират", class:"skin-ocean", price:25, bought:false },
+        { id:43, name:"🤠 Ковбой", class:"skin-sunset", price:22, bought:false },
+        { id:44, name:"👮 Полицейский", class:"skin-cyber", price:20, bought:false },
+        { id:45, name:"🧑‍🚀 Космонавт", class:"skin-galaxy", price:30, bought:false },
+        { id:46, name:"🦸 Супергерой", class:"skin-rainbow", price:35, bought:false },
+        { id:47, name:"🦹 Злодей", class:"skin-plasma", price:35, bought:false },
+        { id:48, name:"🧸 Плюшевый", class:"skin-candy", price:15, bought:false },
+        { id:49, name:"🍕 Пицца", class:"skin-sunset", price:18, bought:false },
+        { id:50, name:"🎮 Геймер", class:"skin-neon", price:25, bought:false },
+        { id:51, name:"🎸 Рокер", class:"skin-fire", price:28, bought:false },
+        { id:52, name:"🧘 Дзен", class:"skin-ice", price:20, bought:false },
+        { id:53, name:"🏆 Чемпион", class:"skin-gold", price:40, bought:false }
     ];
-    // Добавляем ещё 36 скинов (до 54)
-    for(let i=19; i<54; i++) {
-        skins.push({ id:i, name:`🎨 Скин ${i+1}`, class:`skin-${i}`, price:Math.floor(5 + i*0.5), bought:false });
-    }
+    
+    // Принтеры
+    const printers = [
+        { id:0, name:"🖨️ Prusa MK4", desc:"Надёжный", price:5000, bought:false },
+        { id:1, name:"🚀 Bambu Lab X1C", desc:"Сверхбыстрый", price:15000, bought:false },
+        { id:2, name:"🏭 Creality K1", desc:"Скоростной", price:25000, bought:false },
+        { id:3, name:"💎 Voron 2.4", desc:"Самосборка", price:50000, bought:false },
+        { id:4, name:"👑 RatRig V-Core", desc:"Промышленный", price:100000, bought:false }
+    ];
     
     // 20 улучшений
     const upgrades = [];
@@ -199,19 +218,24 @@
         upgrades.push({ id: i, name: names[i], desc: `+${power} ${type === "click" ? "за клик" : "дет/сек"}`, basePrice, power, type, level: 0 });
     }
     
-    // Декоративные принтеры
-    const printers = [
-        { id:0, name:"🖨️ Prusa MK4", desc:"Надёжный чешский принтер", price:5000, bought:false, photo:"img/prusa.jpg" },
-        { id:1, name:"🚀 Bambu Lab X1C", desc:"Сверхбыстрая печать", price:15000, bought:false, photo:"img/bambu.jpg" },
-        { id:2, name:"🏭 Creality K1", desc:"Скоростной CoreXY", price:25000, bought:false, photo:"img/creality.jpg" },
-        { id:3, name:"💎 Voron 2.4", desc:"Самосборка 300x300", price:50000, bought:false, photo:"img/voron.jpg" },
-        { id:4, name:"👑 RatRig V-Core", desc:"Промышленный класс", price:100000, bought:false, photo:"img/ratrig.jpg" }
-    ];
-    
-    // 100+ ачивок (сокращённо, но работает)
+    // ========== 100 АЧИВОК С НАЗВАНИЯМИ ==========
     let achievements = [];
+    const achNames = [
+        "Первый шаг", "100 кликов", "1000 кликов", "Первый миллион", "Миллиардер",
+        "Любитель скинов", "Коллекционер", "Мастер скинов", "Первое перерождение", "Инженер",
+        "Механик", "Профессор", "Гуру", "Легенда", "Мировой судья",
+        "Космический странник", "Повелитель принтеров", "Азартный игрок", "Везунчик", "Неудачник",
+        "Инвестор", "Магнат", "Олигарх", "Триллионер", "Бесконечность",
+        "Скорость света", "Сверхзвуковой", "Реактивный", "Космический", "Божественный",
+        "Мастер кликов", "Грандмастер", "Элитный кликер", "Повелитель кликов", "Бог кликов",
+        "Собиратель звёзд", "Звёздный", "Астральный", "Галактический", "Вселенский",
+        "Хранитель времени", "Разрушитель рекордов", "Легендарный", "Мифический", "Бессмертный",
+        "Покоритель миров", "Властелин вселенной", "Абсолют", "Нулевой", "Финал"
+    ];
     for(let i=0; i<100; i++) {
-        achievements.push({ id:i, name:`🏆 Ачивка ${i+1}`, target:1000*(i+1), current:0, unlocked:false });
+        let name = achNames[i % achNames.length] + (i >= achNames.length ? ` ${Math.floor(i/achNames.length)+1}` : "");
+        let target = i < 10 ? 1000 * (i+1) : 1000000 * (i-9);
+        achievements.push({ id:i, name:name, target:target, current:0, unlocked:false });
     }
     
     let totalUpgradeLevels = 0, skinsBoughtCount = 1, clickCount = 0;
@@ -221,11 +245,9 @@
     function recalcPower() {
         let baseClick = 1;
         for (let u of upgrades) if (u.type === "click") baseClick += u.power * u.level;
-        let multiplier = (1 + rebirthBonus / 100) * prestigeMultiplier;
+        let multiplier = 1 + (rebirthBonus / 100);
         clickPower = Math.floor(baseClick * multiplier);
         if (clickPower < 1) clickPower = 1;
-        document.getElementById('bonusIndicator').innerHTML = rebirthBonus ? `✨ +${rebirthBonus}%` : '';
-        document.getElementById('prestigeIndicator').innerHTML = prestigeMultiplier > 1 ? `👑 x${prestigeMultiplier}` : '';
         return clickPower;
     }
     
@@ -236,28 +258,16 @@
     }
     
     function applySkin() {
-        let activeSkin = skins.find(s => s.id === (currentWorld % skins.length));
-        document.getElementById('clickBtn').className = "click-btn " + (activeSkin?.class || "");
+        let skin = skins.find(s => s.id === currentSkin);
+        let btn = document.getElementById('clickBtn');
+        if (skin && skin.class) btn.className = "click-btn " + skin.class;
+        else btn.className = "click-btn";
     }
     
     function showError(msg) {
         let errDiv = document.getElementById('errorMsg');
         errDiv.innerHTML = `<div class="error-msg">⚠️ ${msg}</div>`;
         setTimeout(() => { if(errDiv.firstChild) errDiv.firstChild.remove(); }, 2000);
-    }
-    
-    function checkAchievements() {
-        for (let a of achievements) {
-            if (!a.unlocked && totalEarned >= a.target) {
-                a.unlocked = true;
-                let popup = document.createElement('div');
-                popup.className = 'achievement-popup';
-                popup.innerText = `🏆 ${a.name}!`;
-                document.body.appendChild(popup);
-                setTimeout(() => popup.remove(), 2000);
-            }
-        }
-        updateAchievementsUI();
     }
     
     function updateUI() {
@@ -280,8 +290,13 @@
         skinsDiv.innerHTML = '';
         for (let s of skins) {
             let div = document.createElement('div');
-            div.className = 'skin-item';
-            div.innerHTML = `<div class="skin-info"><div class="skin-name">${s.name} ${s.bought ? '✅' : ''}</div><div class="skin-desc">⭐ ${s.price}</div></div>${!s.bought ? `<button class="buy-btn" data-skin="${s.id}">Купить</button>` : '<span style="color:#8bc34a;">Доступен</span>'}`;
+            div.className = 'skin-item' + (currentSkin === s.id ? ' active-skin' : '');
+            div.innerHTML = `<div class="skin-info"><div class="skin-name">${s.name} ${s.bought ? '✅' : ''}</div><div class="skin-desc">⭐ ${s.price}</div></div>${!s.bought ? `<button class="buy-btn" data-skin="${s.id}">Купить</button>` : '<span>Применить</span>'}`;
+            div.onclick = (e) => {
+                if(e.target.tagName !== 'BUTTON') {
+                    if(s.bought) { currentSkin = s.id; applySkin(); updateUI(); saveGame(); showError(`✨ Скин "${s.name}" применён!`); }
+                }
+            };
             skinsDiv.appendChild(div);
         }
         
@@ -290,14 +305,13 @@
         for (let p of printers) {
             let div = document.createElement('div');
             div.className = 'printer-item';
-            div.innerHTML = `<div class="upgrade-info"><div class="upgrade-name">${p.name} ${p.bought ? '✅' : ''}</div><div class="upgrade-desc">${p.desc}</div></div><div class="upgrade-price">💰 ${formatNumber(p.price)}</div>${!p.bought ? `<button class="buy-btn" data-printer="${p.id}">Купить</button>` : '<span style="color:#8bc34a;">Куплен</span>'}`;
+            div.innerHTML = `<div class="upgrade-info"><div class="upgrade-name">${p.name} ${p.bought ? '✅' : ''}</div><div class="upgrade-desc">${p.desc}</div></div><div class="upgrade-price">💰 ${formatNumber(p.price)}</div>${!p.bought ? `<button class="buy-btn" data-printer="${p.id}">Купить</button>` : '<span>Куплен</span>'}`;
             printersDiv.appendChild(div);
         }
         
-        document.querySelectorAll('[data-id]').forEach(btn => btn.onclick = () => buyUpgrade(parseInt(btn.dataset.id)));
-        document.querySelectorAll('[data-skin]').forEach(btn => btn.onclick = () => buySkin(parseInt(btn.dataset.skin)));
-        document.querySelectorAll('[data-printer]').forEach(btn => btn.onclick = () => buyPrinter(parseInt(btn.dataset.printer)));
-        applySkin();
+        document.querySelectorAll('[data-id]').forEach(btn => btn.onclick = (e) => { e.stopPropagation(); buyUpgrade(parseInt(btn.dataset.id)); });
+        document.querySelectorAll('[data-skin]').forEach(btn => btn.onclick = (e) => { e.stopPropagation(); buySkin(parseInt(btn.dataset.skin)); });
+        document.querySelectorAll('[data-printer]').forEach(btn => btn.onclick = (e) => { e.stopPropagation(); buyPrinter(parseInt(btn.dataset.printer)); });
         updateAchievementsUI();
     }
     
@@ -335,21 +349,6 @@
         } else showError(`Нужно 10 млн деталей. Не хватает ${formatNumber(10000000 - totalEarned)}`);
     }
     
-    function performPrestige() {
-        if (totalEarned >= 100000000) {
-            prestigeMultiplier += 0.2;
-            rebirthBonus = 0;
-            starPoints = 0;
-            score = 0; totalEarned = 0;
-            for (let up of upgrades) up.level = 0;
-            for (let sk of skins) if (sk.id !== 0) sk.bought = false;
-            for (let pr of printers) pr.bought = false;
-            skinsBoughtCount = 1; totalUpgradeLevels = 0;
-            recalcPower(); updateUI(); saveGame(); checkAchievements();
-            alert(`👑 ПРЕСТИЖ! Множитель x${prestigeMultiplier}, всё сброшено!`);
-        } else showError(`Нужно 100 млн деталей!`);
-    }
-    
     function handleClick() {
         let gain = clickPower;
         score += gain; totalEarned += gain; clickCount++;
@@ -359,7 +358,7 @@
         setTimeout(() => btn.style.transform = '', 90);
     }
     
-    function casinoGame(betInputId, multiplier, chancePercent, gameName) {
+    function casinoGame(betInputId, multiplier, chancePercent) {
         let bet = parseInt(document.getElementById(betInputId).value);
         if (isNaN(bet) || bet <= 0 || bet > score) { showError("Недостаточно деталей!"); return; }
         let win = Math.random() * 100 < chancePercent;
@@ -368,57 +367,42 @@
         updateUI(); saveGame();
     }
     
-    let lastDailyClaim = localStorage.getItem('lastDailyClaim') || 0;
-    function updateDailyUI() {
-        let canClaim = (Date.now() - parseInt(lastDailyClaim)) >= 86400000;
-        document.getElementById('dailyStatus').innerHTML = canClaim ? '🎁 Бонус готов! (5⭐)' : `⏳ Через ${Math.floor((86400000 - (Date.now() - lastDailyClaim)) / 3600000)} ч`;
+    function checkAchievements() {
+        for (let a of achievements) {
+            if (!a.unlocked && totalEarned >= a.target) {
+                a.unlocked = true;
+                let popup = document.createElement('div');
+                popup.className = 'achievement-popup';
+                popup.innerText = `🏆 ${a.name}!`;
+                document.body.appendChild(popup);
+                setTimeout(() => popup.remove(), 2000);
+                updateAchievementsUI();
+                saveGame();
+            }
+        }
     }
-    function claimDaily() {
-        if ((Date.now() - parseInt(lastDailyClaim)) >= 86400000) {
-            starPoints += 5;
-            lastDailyClaim = Date.now();
-            localStorage.setItem('lastDailyClaim', lastDailyClaim);
-            updateUI(); updateDailyUI();
-            showError("🎁 +5 звёзд!");
-        } else showError("Бонус завтра!");
-    }
-    
-    function lottery() {
-        if (score < 1000) { showError("Нужно 1000 деталей!"); return; }
-        score -= 1000;
-        if (Math.random() < 0.1) { score += 10000; showError("🎉 ЛОТЕРЕЯ! +10000 деталей!"); }
-        else showError("😞 Билет проиграл...");
-        updateUI(); saveGame();
-    }
-    
-    // События
-    function happyHour() { if(starPoints>=50){ starPoints-=50; showError("✨ Счастливый час! x2 на 30 сек"); let oldPower=clickPower; clickPower*=2; setTimeout(()=>{clickPower=oldPower; recalcPower(); updateUI();},30000); recalcPower(); updateUI(); saveGame(); } else showError("Нужно 50⭐"); }
-    function eventBoost() { if(starPoints>=30){ starPoints-=30; showError("🚀 Ускорение! +100% пассивки на 1 мин"); let oldPassive=getPassiveIncome; setInterval(()=>{},60000); updateUI(); saveGame(); } else showError("Нужно 30⭐"); }
-    function starRain() { if(starPoints>=100){ starPoints-=100; starPoints+=10; showError("⭐ Звёздный дождь! +10⭐"); updateUI(); saveGame(); } else showError("Нужно 100⭐"); }
     
     function updateAchievementsUI() {
         const container = document.getElementById('achievementsList');
         if (!container) return;
         container.innerHTML = '';
-        let shown = achievements.slice(0, 20);
-        for (let a of shown) {
+        for (let a of achievements) {
             let div = document.createElement('div');
             div.className = 'achievement-item';
             div.innerHTML = `<div class="upgrade-info"><div class="upgrade-name">${a.name} ${a.unlocked ? '✅' : '🔒'}</div></div><div>${formatNumber(Math.min(a.current, a.target))}/${formatNumber(a.target)}</div>`;
             container.appendChild(div);
         }
-        if(achievements.length>20) container.innerHTML += `<div style="text-align:center; margin-top:8px;">... и ещё ${achievements.length-20} ачивок</div>`;
     }
     
     function resetFullProgress() { if(confirm("Сбросить ВСЁ?")){ localStorage.clear(); location.reload(); } }
     
     function saveGame() {
-        let saveObj = { score, totalEarned, clickPower, currentWorld, rebirthBonus, starPoints, prestigeMultiplier, playerName,
+        let saveObj = { score, totalEarned, clickPower, rebirthBonus, starPoints, currentSkin, playerName,
             upgrades: upgrades.map(u => ({ id: u.id, level: u.level })),
             skins: skins.map(s => ({ id: s.id, bought: s.bought })),
             printers: printers.map(p => ({ id: p.id, bought: p.bought })),
             achievements: achievements.map(a => ({ id: a.id, current: a.current, unlocked: a.unlocked })),
-            totalUpgradeLevels, skinsBoughtCount, clickCount, lastDailyClaim };
+            totalUpgradeLevels, skinsBoughtCount, clickCount };
         localStorage.setItem('clickerProSave', JSON.stringify(saveObj));
     }
     
@@ -428,41 +412,34 @@
         try {
             let data = JSON.parse(raw);
             score = data.score || 0; totalEarned = data.totalEarned || 0; clickPower = data.clickPower || 1;
-            currentWorld = data.currentWorld || 1; rebirthBonus = data.rebirthBonus || 0; starPoints = data.starPoints || 0; prestigeMultiplier = data.prestigeMultiplier || 1;
-            playerName = data.playerName || "Гость"; lastDailyClaim = data.lastDailyClaim || 0;
+            rebirthBonus = data.rebirthBonus || 0; starPoints = data.starPoints || 0; currentSkin = data.currentSkin || 0;
+            playerName = data.playerName || "Гость";
             if (data.upgrades) for (let s of data.upgrades) { let up = upgrades.find(u => u.id === s.id); if (up) up.level = s.level; }
             if (data.skins) for (let sk of data.skins) { let t = skins.find(s => s.id === sk.id); if (t) t.bought = sk.bought; }
             if (data.printers) for (let pr of data.printers) { let p = printers.find(prn => prn.id === pr.id); if (p) p.bought = pr.bought; }
             if (data.achievements) for (let a of data.achievements) { let ach = achievements.find(ac => ac.id === a.id); if (ach) { ach.current = a.current; ach.unlocked = a.unlocked; } }
             totalUpgradeLevels = data.totalUpgradeLevels || 0; skinsBoughtCount = data.skinsBoughtCount || 1; clickCount = data.clickCount || 0;
             document.getElementById('playerName').value = playerName;
-            recalcPower(); updateUI(); return true;
+            recalcPower(); applySkin(); updateUI(); return true;
         } catch(e) { return false; }
     }
     
-    loadGame(); recalcPower(); updateUI(); updateDailyUI();
+    loadGame(); recalcPower(); applySkin(); updateUI();
     setInterval(() => { let inc = getPassiveIncome(); if (inc > 0) { score += inc; totalEarned += inc; updateUI(); saveGame(); } }, 1000);
     document.getElementById('clickBtn').onclick = handleClick;
     document.getElementById('resetProgressBtn').onclick = resetFullProgress;
     document.getElementById('rebirthBtn').onclick = performRebirth;
-    document.getElementById('prestigeBtn').onclick = performPrestige;
-    document.getElementById('casinoDiceBtn').onclick = () => casinoGame('diceBet', 2, 40, "Кости");
-    document.getElementById('casinoRouletteBtn').onclick = () => casinoGame('rouletteBet', 3, 25, "Рулетку");
-    document.getElementById('casinoSlotsBtn').onclick = () => casinoGame('slotsBet', 5, 15, "Слоты");
-    document.getElementById('casinoCrashBtn').onclick = () => casinoGame('crashBet', 10, 8, "КРАШ");
-    document.getElementById('dailyClaimBtn').onclick = claimDaily;
-    document.getElementById('lotteryBtn').onclick = lottery;
-    document.getElementById('eventHappyHour').onclick = happyHour;
-    document.getElementById('eventBoost').onclick = eventBoost;
-    document.getElementById('eventStarRain').onclick = starRain;
+    document.getElementById('casinoDiceBtn').onclick = () => casinoGame('diceBet', 2, 40);
+    document.getElementById('casinoRouletteBtn').onclick = () => casinoGame('rouletteBet', 3, 25);
+    document.getElementById('casinoSlotsBtn').onclick = () => casinoGame('slotsBet', 5, 15);
+    document.getElementById('casinoCrashBtn').onclick = () => casinoGame('crashBet', 10, 8);
     
     document.querySelectorAll('.tab').forEach(tab => {
         tab.onclick = () => {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             tab.classList.add('active');
-            let target = document.getElementById(tab.dataset.tab + 'Tab');
-            if (target) target.classList.add('active');
+            document.getElementById(tab.dataset.tab + 'Tab').classList.add('active');
         };
     });
 </script>
